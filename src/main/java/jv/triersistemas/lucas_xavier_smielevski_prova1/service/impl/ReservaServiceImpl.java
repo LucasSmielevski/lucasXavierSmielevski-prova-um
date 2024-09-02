@@ -99,7 +99,7 @@ public class ReservaServiceImpl implements ReservaService {
 				.anyMatch(reservaExistente -> reservaExistente.getStatus().equals(StatusEnum.FEITA));
 		if (Objects.nonNull(reservasExistentes) && reservasFeitas) {
 			if (!reservasExistentes.isEmpty()) {
-				throw new IllegalArgumentException("Já existe uma reserva da mesa para está data");
+				throw new IllegalArgumentException("Já existe uma reserva da mesa para está dat");
 			}
 		}
 	}

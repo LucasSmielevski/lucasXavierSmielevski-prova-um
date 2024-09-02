@@ -19,6 +19,7 @@ import jv.triersistemas.lucas_xavier_smielevski_prova1.dto.ClienteDto;
 import jv.triersistemas.lucas_xavier_smielevski_prova1.dto.ReservaDto;
 import jv.triersistemas.lucas_xavier_smielevski_prova1.enums.StatusEnum;
 import lombok.AllArgsConstructor;
+import java.util.Objects;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -50,14 +51,11 @@ public class ReservaEntity {
 		this.dataReserva = dto.getDataReserva();
 		this.numeroPessoas = dto.getNumeroPessoas();
 		this.numeroMesa = dto.getNumeroMesa();
-		this.status = dto.getStatus();
+		this.status = Objects.nonNull(dto.getStatus()) ? dto.getStatus() : StatusEnum.FEITA;
 	}
 
-	public ReservaEntity atualizaReserva(ReservaDto dto) {
-		this.dataReserva = dto.getDataReserva();
-		this.numeroPessoas = dto.getNumeroPessoas();
-		this.numeroMesa = dto.getNumeroMesa();
-		this.status = dto.getStatus();
+	public ReservaEntity atualizarStatus(StatusEnum status) {
+		this.status = status;
 		return this;
 	}
 }

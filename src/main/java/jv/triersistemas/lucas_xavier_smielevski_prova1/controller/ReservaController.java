@@ -1,5 +1,6 @@
 package jv.triersistemas.lucas_xavier_smielevski_prova1.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jv.triersistemas.lucas_xavier_smielevski_prova1.dto.ClienteDto;
 import jv.triersistemas.lucas_xavier_smielevski_prova1.dto.ReservaDto;
+import jv.triersistemas.lucas_xavier_smielevski_prova1.enums.StatusEnum;
 import jv.triersistemas.lucas_xavier_smielevski_prova1.service.ReservaService;
 
 @RestController
@@ -22,11 +23,11 @@ import jv.triersistemas.lucas_xavier_smielevski_prova1.service.ReservaService;
 public class ReservaController {
 
 	@Autowired
-	ReservaService reservaService;
+	private ReservaService reservaService;
 
 	@PostMapping
-	public ReservaDto adicionarReserva(@RequestBody ReservaDto novaReserva, ClienteDto clienteDto) {
-		return reservaService.adicionarReserva(novaReserva, clienteDto);
+	public ReservaDto adicionarReserva(@RequestBody ReservaDto novaReserva) {
+		return reservaService.adicionarReserva(novaReserva);
 	}
 
 	@GetMapping("/cliente/{clienteId}")
@@ -35,13 +36,15 @@ public class ReservaController {
 		return tarefas;
 	}
 
-	@PutMapping("{id}")
-	public ReservaDto atualizarStatusReserva(@PathVariable Long id, @RequestBody ReservaDto reservaAtualizada) {
-		return reservaService.atualizaReserva(id, reservaAtualizada);
+	@GetMapping
+	public String buscarReservaNaMesaPorData(@RequestParam LocalDate data, @RequestParam Integer numeroMesa) {
+		String resultado = reservaService.buscarSeTemReservaNaMesaPorData(data, numeroMesa);
+		return resultado;
 	}
-	
-	@DeleteMapping
-	public void removerTarefa(@RequestParam Long id) {
-		reservaService.removerTarefa(id);
+
+	@PutMapping()
+	public ReservaDto atualizarStatusReserva(@RequestParam Long id, @RequestParam StatusEnum status) {
+		return reservaService.atualizaReserva(id, status);
 	}
+
 }

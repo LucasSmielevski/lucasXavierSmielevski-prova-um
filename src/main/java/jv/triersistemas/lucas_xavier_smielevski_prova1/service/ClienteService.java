@@ -12,12 +12,12 @@ import jv.triersistemas.primeiro_projeto.dto.TarefaDto;
 
 public interface ClienteService {
 	List<ClienteDto> getTodosClientes();
-	
-	Optional<ClienteDto> getClientePorId(@RequestParam Long id);
 
-	ClienteDto adicionarCliente(@RequestBody ClienteDto novaTarefa);
-	
-	ClienteDto atualizarCliente( Long id, ClienteDto clienteAtualizado);
-	
-	void removerCliente(@RequestParam Long id); 
+	Optional<ClienteDto> getClientePorId(Long id);
+
+	ClienteDto adicionarCliente(ClienteDto novaCliente);
+
+	ClienteDto atualizarCliente(Long id, ClienteDto clienteAtualizado);
+
+	void removerCliente(Long id);
 }

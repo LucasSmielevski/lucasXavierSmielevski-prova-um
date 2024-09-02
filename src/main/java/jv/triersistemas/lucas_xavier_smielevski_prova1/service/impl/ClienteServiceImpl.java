@@ -31,8 +31,8 @@ public class ClienteServiceImpl implements ClienteService{
 	}
 
 	@Override
-	public ClienteDto adicionarCliente(ClienteDto novaTarefa) {
-		ClienteEntity novoCliente = repository.save(new ClienteEntity(novaTarefa));
+	public ClienteDto adicionarCliente(ClienteDto novaCliente) {
+		ClienteEntity novoCliente = repository.save(new ClienteEntity(novaCliente));
 		return new ClienteDto(novoCliente);
 	}
 
